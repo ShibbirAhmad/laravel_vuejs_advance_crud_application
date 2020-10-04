@@ -23,4 +23,5 @@ Auth::routes();
 
 Route::get('/', 'CustomerController')->name('customers');
 
+Route::apiResource('/customer','CustomerController');
 
