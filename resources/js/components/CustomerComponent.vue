@@ -25,31 +25,32 @@
                  <div class="row">
 
 
-                     <div class="col-lg-10 col-md-10 col-sm-10 ">
+                     <div class="col-lg-12 col-md-12 col-sm-12 ">
                         
                       
                         <div class="table-responsive">
                         
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th scope="col">Serial No</th>
                                         <th scope="col">Name </th>
-                                        <th scope="col">Address</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col ">Action</th>
-                        
-                        
-                                        </tr>
+                                        <th scope="col">Address</th>
+                                        <th colspan="3" scope="col">Action</th>
+                    
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Shibbir Ahmad</td>
-                                    <td>Polton,Dhaka</td>
-                                    <td>shibbirahmad@gmail.com</td>
-                                    <td>01759 416979</td>
+
+
+                                  <tr v-for=" (customer,index)  in customers " v-bind:key="customer.id" >
+                                    <th scope="row">{{ index+1 }}</th>
+                                    <td>{{  customer.name }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.phone }}</td>
+                                    <td>{{  customer.address.substring(0,19) }} </td>
                                     <td> 
 
                                         <i style="cursor:pointer;" class="fa fa-edit " > </i>  
@@ -59,20 +60,7 @@
 
                                   </tr>
                                  
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Shibbir Ahmad</td>
-                                    <td>Polton,Dhaka</td>
-                                    <td>shibbirahmad@gmail.com</td>
-                                    <td>01759 416979</td>
-                                    <td> 
-
-                                        <i style="cursor:pointer;" class="fa fa-edit " > </i>  
-                                        <i  style="cursor:pointer;" class="fa fa-trash-alt ml-3"> </i> 
-                                    
-                                    </td>
-
-                                  </tr>
+                               
                                   
                                 </tbody>
                               </table>
@@ -91,7 +79,46 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
-        }
+            console.log('Component mounted.') ;
+            this.getCustomerList() ;
+        },
+
+
+        data(){
+
+             return {
+
+               customers: '',  
+
+             }    
+                 
+        },
+
+        methods:{
+             
+             getCustomerList(){
+                 
+                 axios.get('all/customer')
+
+                 .then(resp => {
+                     
+                      if (resp.data.success == "OK") {
+                        
+                            this.customers=resp.data.customers 
+
+                      }
+
+                      console.log(resp);
+                 })
+
+
+
+
+             }
+        },
+
+    
+
+
     }
 </script>

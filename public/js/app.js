@@ -1986,21 +1986,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+    this.getCustomerList();
+  },
+  data: function data() {
+    return {
+      customers: ''
+    };
+  },
+  methods: {
+    getCustomerList: function getCustomerList() {
+      var _this = this;
+
+      axios.get('all/customer').then(function (resp) {
+        if (resp.data.success == "OK") {
+          _this.customers = resp.data.customers;
+        }
+
+        console.log(resp);
+      });
+    }
   }
 });
 
@@ -37588,115 +37595,111 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 " }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-bordered table-striped" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.customers, function(customer, index) {
+                return _c("tr", { key: customer.id }, [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(index + 1))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(customer.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(customer.email))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(customer.phone))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(customer.address.substring(0, 19)) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2, true)
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "div",
-        {
-          staticClass: "row",
-          staticStyle: { "margin-top": "50px", "margin-bottom": "10px" }
-        },
-        [
-          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-6 " }, [
-            _c("a", { staticClass: "btn btn-info text-white " }, [
-              _vm._v(" Add New Customer ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
-            _c("form", { attrs: { action: "" } }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "exampleInputPassword1",
-                  placeholder: "search here "
-                }
-              })
-            ])
+    return _c(
+      "div",
+      {
+        staticClass: "row",
+        staticStyle: { "margin-top": "50px", "margin-bottom": "10px" }
+      },
+      [
+        _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-6 " }, [
+          _c("a", { staticClass: "btn btn-info text-white " }, [
+            _vm._v(" Add New Customer ")
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-10 col-md-10 col-sm-10 " }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table table-bordered table-striped" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Serial No")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Name ")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Address")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Phone")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col " } }, [_vm._v("Action")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Shibbir Ahmad")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Polton,Dhaka")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("shibbirahmad@gmail.com")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("01759 416979")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("i", {
-                      staticClass: "fa fa-edit ",
-                      staticStyle: { cursor: "pointer" }
-                    }),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fa fa-trash-alt ml-3",
-                      staticStyle: { cursor: "pointer" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Shibbir Ahmad")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Polton,Dhaka")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("shibbirahmad@gmail.com")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("01759 416979")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("i", {
-                      staticClass: "fa fa-edit ",
-                      staticStyle: { cursor: "pointer" }
-                    }),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fa fa-trash-alt ml-3",
-                      staticStyle: { cursor: "pointer" }
-                    })
-                  ])
-                ])
-              ])
-            ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
+          _c("form", { attrs: { action: "" } }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "exampleInputPassword1",
+                placeholder: "search here "
+              }
+            })
           ])
         ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Serial No")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Phone")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", { attrs: { colspan: "3", scope: "col" } }, [_vm._v("Action")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("i", {
+        staticClass: "fa fa-edit ",
+        staticStyle: { cursor: "pointer" }
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fa fa-trash-alt ml-3",
+        staticStyle: { cursor: "pointer" }
+      })
     ])
   }
 ]

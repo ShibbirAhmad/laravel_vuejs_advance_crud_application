@@ -23,5 +23,6 @@ Auth::routes();
 
 Route::get('/', 'CustomerController')->name('customers');
 
-Route::apiResource('/customer','CustomerController');
+Route::get('/all/customer', 'CustomerDataController@getCustomers') ;
+
 
