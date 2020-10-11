@@ -1991,6 +1991,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -2001,7 +2044,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       customers: '',
       edit: false,
-      singleCustomer: ''
+      singleCustomer: '',
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      modal: false
     };
   },
   methods: {
@@ -2016,17 +2064,35 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
       });
     },
+    formSubmit: function formSubmit() {
+      var _this2 = this;
+
+      axios.post('add/customer/new', {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        address: this.address
+      }).then(function (resp) {
+        if (resp.data.success == "OK") {
+          alert(resp.data.message);
+
+          _this2.getCustomerList();
+
+          _this2.modal = false;
+        }
+      });
+    },
     editAction: function editAction(customer) {
       this.edit = true;
       this.singleCustomer = customer;
     },
     deleteAction: function deleteAction(customer, index) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios["delete"]('remove/customer/' + customer.id).then(function (resp) {
         if (resp.data.success == "OK") {
           // this.getCustomerList();
-          _this2.customers.splice(index, 1);
+          _this3.customers.splice(index, 1);
 
           alert(resp.data.message);
         }
@@ -37714,7 +37780,31 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass: "row",
+          staticStyle: { "margin-top": "50px", "margin-bottom": "10px" }
+        },
+        [
+          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-6 " }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-info text-white ",
+                on: {
+                  click: function($event) {
+                    _vm.modal = true
+                  }
+                }
+              },
+              [_vm._v(" Add New Customer ")]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 " }, [
@@ -37724,7 +37814,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.customers, function(customer, index) {
+                _vm._l(_vm.customers.data, function(customer, index) {
                   return _c("tr", { key: customer.id }, [
                     _c("th", { attrs: { scope: "row" } }, [
                       _vm._v(_vm._s(index + 1))
@@ -37770,6 +37860,177 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _vm.modal
+        ? _c(
+            "div",
+            {
+              staticClass: "modal",
+              staticStyle: { display: "block" },
+              attrs: { tabindex: "-1" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.formSubmit()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "my-input" } }, [
+                            _vm._v("Name")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.name,
+                                expression: "name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "my-input", type: "text" },
+                            domProps: { value: _vm.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.name = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "my-input" } }, [
+                            _vm._v("Email")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.email,
+                                expression: "email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "my-input", type: "email" },
+                            domProps: { value: _vm.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.email = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "my-input" } }, [
+                            _vm._v("Phone")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.phone,
+                                expression: "phone"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "my-input", type: "text" },
+                            domProps: { value: _vm.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.phone = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "my-input" } }, [
+                            _vm._v("Address")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.address,
+                                expression: "address"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "my-input", type: "text" },
+                            domProps: { value: _vm.address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.address = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-right",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Save")]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            _vm.modal = false
+                          }
+                        }
+                      },
+                      [_vm._v("Close")]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _vm.edit
         ? _c("add", { attrs: { customer: _vm.singleCustomer } })
         : _vm._e()
@@ -37782,33 +38043,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "row",
-        staticStyle: { "margin-top": "50px", "margin-bottom": "10px" }
-      },
-      [
-        _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-6 " }, [
-          _c("a", { staticClass: "btn btn-info text-white " }, [
-            _vm._v(" Add New Customer ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
-          _c("form", { attrs: { action: "" } }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "exampleInputPassword1",
-                placeholder: "search here "
-              }
-            })
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
+      _c("form", { attrs: { action: "" } }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "exampleInputPassword1",
+            placeholder: "search here "
+          }
+        })
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -37828,6 +38074,29 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { colspan: "3", scope: "col" } }, [_vm._v("Action")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addNewTeacher" } }, [
+        _vm._v("Add New Customer ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]

@@ -25,6 +25,8 @@ Route::get('/', 'CustomerController')->name('customers');
 
 Route::get('/all/customer', 'CustomerDataController@getCustomers') ;
 
+Route::post('add/customer/new', 'CustomerDataController@addCustomers') ;
+
 Route::put('customer/update/{id}','CustomerDataController@updateCustomer');
 
 Route::delete('remove/customer/{id}','CustomerDataController@destroyCustomer');

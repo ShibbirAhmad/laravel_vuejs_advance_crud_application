@@ -6,7 +6,7 @@
               <div style="margin-top:50px;margin-bottom:10px;" class="row">
                   
                     <div class="col-lg-6 col-md-6 col-sm-6 ">
-                           <a class="btn btn-info text-white " > Add New Customer </a>
+                           <a class="btn btn-info text-white " @click="modal=true" > Add New Customer </a>
                     </div> 
 
                     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -45,7 +45,7 @@
                                 <tbody>
 
 
-                                  <tr v-for=" (customer,index)  in customers " v-bind:key="customer.id" >
+                                  <tr v-for=" (customer,index)  in customers.data " v-bind:key="customer.id" >
                                     <th scope="row">{{ index+1 }}</th>
                                     <td>{{  customer.name }}</td>
                                     <td>{{ customer.email }}</td>
@@ -71,7 +71,50 @@
                      </div>
                  </div>
 
+ <div class="modal"   tabindex="-1" style="display:block;" v-if="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewTeacher">Add New Customer </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form class="form" @submit.prevent="formSubmit()">
+      <div class="modal-body">
+         
+         
+       
+          <div class="form-group">
+           <label for="my-input">Name</label>
+           <input id="my-input" class="form-control" type="text"  v-model="name">
+           </div>
+            <div class="form-group">
+           <label for="my-input">Email</label>
+           <input id="my-input" class="form-control" type="email" v-model="email">
+           </div>
+           <div class="form-group">
+           <label for="my-input">Phone</label>
+           <input id="my-input" class="form-control" type="text" v-model="phone">
+           </div>
+           <div class="form-group">
+           <label for="my-input">Address</label>
+           <input id="my-input" class="form-control" type="text"  v-model="address">
+           </div>
 
+      
+              <button type="submit" class="btn btn-primary float-right">Save</button> 
+      </div>
+        </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="modal=false" >Close</button>
+   
+        
+       
+      </div>
+    </div>
+  </div>
+  </div>
 
 <add v-if="edit" :customer="singleCustomer"></add>
 
@@ -96,7 +139,13 @@ import Edit  from './Edit.vue';
 
                customers: '',
                edit:false,
-               singleCustomer:''  
+               singleCustomer:''  ,
+               name : '',
+               email : '' ,
+               phone : '',
+               address : '',
+               modal:false,
+
 
              }    
                  
@@ -123,6 +172,31 @@ import Edit  from './Edit.vue';
 
 
              },
+
+             formSubmit(){
+
+                axios.post('add/customer/new',{
+
+                      name : this.name ,
+                      email : this.email ,
+                      phone : this.phone ,
+                      address : this.address ,
+                })
+                .then(resp=> {
+
+                       if (resp.data.success == "OK") {
+                           
+                            alert(resp.data.message);
+                            this.getCustomerList();
+                            this.modal=false;
+                       }
+                })
+
+
+
+             },
+
+
              editAction(customer){
                  this.edit=true;
                  this.singleCustomer=customer;
