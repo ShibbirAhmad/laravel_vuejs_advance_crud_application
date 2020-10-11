@@ -54,7 +54,7 @@
                                     <td> 
 
                                         <i style="cursor:pointer;" class="fa fa-edit " @click="editAction(customer)" > </i>  
-                                        <i  style="cursor:pointer;" class="fa fa-trash-alt ml-3"> </i> 
+                                        <i  style="cursor:pointer;" class="fa fa-trash-alt ml-3 " @click="deleteAction(customer,index)"> </i> 
                                     
                                     </td>
 
@@ -126,6 +126,25 @@ import Edit  from './Edit.vue';
              editAction(customer){
                  this.edit=true;
                  this.singleCustomer=customer;
+             },
+
+
+             deleteAction(customer,index){
+                
+                axios.delete('remove/customer/'+customer.id)
+
+                .then(resp=>{
+
+                    if (resp.data.success == "OK") {
+                        // this.getCustomerList();
+                       this.customers.splice(index, 1);
+                       alert (resp.data.message) ;
+
+                    }
+
+
+                })
+
              }
 
 

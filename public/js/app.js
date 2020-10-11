@@ -2019,6 +2019,18 @@ __webpack_require__.r(__webpack_exports__);
     editAction: function editAction(customer) {
       this.edit = true;
       this.singleCustomer = customer;
+    },
+    deleteAction: function deleteAction(customer, index) {
+      var _this2 = this;
+
+      axios["delete"]('remove/customer/' + customer.id).then(function (resp) {
+        if (resp.data.success == "OK") {
+          // this.getCustomerList();
+          _this2.customers.splice(index, 1);
+
+          alert(resp.data.message);
+        }
+      });
     }
   },
   components: {
@@ -37740,8 +37752,13 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("i", {
-                        staticClass: "fa fa-trash-alt ml-3",
-                        staticStyle: { cursor: "pointer" }
+                        staticClass: "fa fa-trash-alt ml-3 ",
+                        staticStyle: { cursor: "pointer" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteAction(customer, index)
+                          }
+                        }
                       })
                     ])
                   ])

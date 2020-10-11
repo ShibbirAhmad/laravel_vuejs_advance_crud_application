@@ -65,7 +65,22 @@ class CustomerDataController extends Controller
        }
 
 
- 
+       
+       public function destroyCustomer($id){
+
+            
+             $customer = Customer::find($id);
+
+             if ($customer->delete()) {
+                
+                    return response()->json([
+                        "success"  => "OK",
+                         "message"  => "one customer destroyed"
+                    ]);
+             }
+
+
+       }
 
 
       
