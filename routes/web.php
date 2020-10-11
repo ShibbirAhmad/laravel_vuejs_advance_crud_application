@@ -25,4 +25,6 @@ Route::get('/', 'CustomerController')->name('customers');
 
 Route::get('/all/customer', 'CustomerDataController@getCustomers') ;
 
+Route::put('customer/update/{id}','CustomerDataController@updateCustomer');
+
 

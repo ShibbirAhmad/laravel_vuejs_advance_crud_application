@@ -53,7 +53,7 @@
                                     <td>{{  customer.address.substring(0,19) }} </td>
                                     <td> 
 
-                                        <i style="cursor:pointer;" class="fa fa-edit " > </i>  
+                                        <i style="cursor:pointer;" class="fa fa-edit " @click="editAction(customer)" > </i>  
                                         <i  style="cursor:pointer;" class="fa fa-trash-alt ml-3"> </i> 
                                     
                                     </td>
@@ -71,12 +71,18 @@
                      </div>
                  </div>
 
+
+
+<add v-if="edit" :customer="singleCustomer"></add>
+
    </div>
 
 
 </template>
 
 <script>
+
+import Edit  from './Edit.vue';
     export default {
         mounted() {
             console.log('Component mounted.') ;
@@ -88,7 +94,9 @@
 
              return {
 
-               customers: '',  
+               customers: '',
+               edit:false,
+               singleCustomer:''  
 
              }    
                  
@@ -114,8 +122,19 @@
 
 
 
+             },
+             editAction(customer){
+                 this.edit=true;
+                 this.singleCustomer=customer;
              }
+
+
+            
         },
+
+        components:{
+            add:Edit,
+        }
 
     
 
